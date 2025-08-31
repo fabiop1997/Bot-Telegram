@@ -29,3 +29,27 @@ def modelo_linguagem(msg):
 
     return  chat_completion.choices[0].message.content
 
+
+def transcricao_audio(arquivo):
+      
+    cliente = Groq(
+
+            api_key=os.getenv("API_KEY"),
+
+        )
+    transcript = cliente.audio.transcriptions.create(
+                
+                file= arquivo,
+                model = "whisper-large-v3",
+                language="pt",
+                temperature=0.0,
+                response_format='text'
+                
+
+            )
+
+    return transcript
+
+
+
+
